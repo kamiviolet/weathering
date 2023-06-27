@@ -18,25 +18,25 @@ export default function Card({day}: {day:Weather}) {
                     }
                 </span>
             </div>
-            <div className="grid grid-cols-2">
-                <span>Temperature:</span>
-                <span>{day.temp} &#176;C</span>
+            <div className="grid grid-cols-2 md:grid-cols-1">
+                <span className="line-clamp-1 font-bold">Temperature:</span>
+                <span className="text-right">{day.temp} &#176;C</span>
             </div>
-            <div className="grid grid-cols-2">
-                <span>Feels like:</span>
-                <span>{day.feels_like} &#176;C</span>
+            <div className="grid grid-cols-2 md:grid-cols-1">
+                <span className="line-clamp-1 font-bold">Feels like:</span>
+                <span className="text-right">{day.feels_like} &#176;C</span>
             </div>
-            <div className="grid grid-cols-2">
-                <span>Temp range:</span>
-                <span>{day.temp_min} &#176;C - {day.temp_max} &#176;C</span>
+            <div className="grid grid-cols-2 md:grid-cols-1">
+                <span className="line-clamp-1 font-bold">Temp range:</span>
+                <span className="text-right">{day.temp_min} &#176;C - {day.temp_max} &#176;C</span>
             </div>
-            <div className="grid grid-cols-2">
-                <span>Humidity:</span>
-                <span>{day.humidity} %</span>
+            <div className="grid grid-cols-2 md:grid-cols-1">
+                <span className="line-clamp-1 font-bold">Humidity:</span>
+                <span className="text-right">{day.humidity} %</span>
             </div>
-            <div className="grid grid-cols-2">
-                <span>Wind speed:</span>
-                <span>{day.wind_speed} meter/sec</span>
+            <div className="grid grid-cols-2 md:grid-cols-1">
+                <span className="line-clamp-1 font-bold">Wind speed:</span>
+                <span className="text-right">{day.wind_speed} meter/sec</span>
             </div>
         </section>
     )
