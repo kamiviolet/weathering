@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
+require('dotenv').config()
+
 const nextConfig = {
     env: {
-        GEOAPIFY_API: 'f92ad627564d4e9295dd236e1b63061e',
-        OPENWEATHER_API: '8014378fec4b1f18ce2a4783dda26aa4'
+        GEOAPIFY_API: process.env.GEOAPIFY_API,
+        OPENWEATHER_API: process.env.OPENWEATHER_API,
+        UPSPLASH_API: process.env.UPSPLASH_API
       },
 }
 
