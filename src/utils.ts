@@ -1,4 +1,4 @@
-import { Weather } from "@/types";
+import { Weather, searchResult } from "@/types";
 
 export function formatForecastResponse(day:{[key:string]:any}, i:number):(Weather|undefined) {
   const clone = {
@@ -17,4 +17,28 @@ export function formatForecastResponse(day:{[key:string]:any}, i:number):(Weathe
 
 export function convertKevinToCelcius(degree: number):number {
   return +(degree -  273.15).toFixed(2);
+}
+
+export function formatSuggestion(list: searchResult[]):searchResult[] {
+  return list.map(result => {
+    const formatted = {
+      city: result.properties.city,
+      country: result.properties.country,
+      place_id: result.properties.place_id,
+      latitude: result.properties.lat,
+      longitude: result.properties.lon,
+    }
+    return formatted;
+  })
+}
+
+export function getUniqueSuggestion(list: searchResult[]):searchResult[] {
+  const uniqueList = list.reduce(
+    (arr:searchResult[], curr:searchResult)=>{
+      if (list.filter(c => (c.city === curr.city)).length === 1 && curr.city) {
+        arr.push(curr)
+      }
+      return arr;
+    }, [])
+  return uniqueList;
 }
