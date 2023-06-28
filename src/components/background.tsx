@@ -13,13 +13,14 @@ export default function Background({address}: {address: Address}) {
       }, [address])
 
     return (
-        <div
-            className="absolute top-0 bottom-0 left-0 right-0 -z-50 bg-cover bg-bottom h-screen bg-fixed bg-slate-500/50 bg-blend-lighten"
-            style={
+        <div className="absolute top-0 bottom-0 left-0 right-0 -z-50 w-screen lg:h-screen sm:h-full md:h-full bg-white/50">
+            {
                 backgroundURL
-                ? {backgroundImage: `url(${backgroundURL})`}
-                : {}
-            }>
+                ? <img
+                    src={backgroundURL}
+                    className="object-cover bg-fixed w-full h-full mix-blend-plus-lighter"/>
+                : <></>
+            }
         </div>
     )
 }

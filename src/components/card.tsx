@@ -5,7 +5,7 @@ export default function Card({day}: {day:Weather}) {
     const date:string = day.time.split(" ")[0];
 
     return (
-        <section className="grid bg-white/70 rounded-xl h-full p-5 shadow-2xl">
+        <section className="grid bg-white/70 rounded-xl h-full p-3 shadow-2xl">
             <div className="pb-5 font-black">{date}</div>
             <div className="flex flex-row py-5 text-8xl justify-center">
                 <span>

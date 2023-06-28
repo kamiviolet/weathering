@@ -1,18 +1,30 @@
+import { FormEvent, useEffect } from "react";
 import { Location, searchResult } from "@/types";
 import { getAutocomplete } from "@/api";
-import { FormEvent, useEffect, useState } from "react";
 import { formatSuggestion, getUniqueSuggestion } from "@/utils";
 import { SuggestionDropdown } from "./suggestionDropdown";
 
-export default function SearchEngine({location, setLocation}: {
+export default function SearchEngine({location, setLocation, searchTerm, setSearchTerm, loadedGPS, suggestion, setSuggestion}: {
     location: Location,
-    setLocation: (location: Location) => void
+    searchTerm: string,
+    suggestion: searchResult[],
+    setSuggestion: (suggestion: searchResult[]) => void,
+    setLocation: (location: Location) => void,
+    setSearchTerm: (searchTerm:string) => void,
+    loadedGPS: boolean
 }) {
-    const [searchTerm, setSearchTerm] = useState<string>("-");
-    const [suggestion, setSuggestion] = useState<searchResult[]>([]);
-
     const handleSearch = (e:FormEvent):void => {
         e.preventDefault();
+        const result:searchResult|undefined = suggestion.find(result => result.city === searchTerm);
+        
+        if (result) {
+            setLocation({
+                latitude: result.latitude,
+                longitude: result.longitude
+            })
+        } else {
+            alert(`No result is found. Would you be more specific or pick any suggestions provided?`)
+        }
     };
 
     useEffect(() => {
@@ -24,13 +36,14 @@ export default function SearchEngine({location, setLocation}: {
     }, [searchTerm])
 
     return (
-        <form className="relative" onSubmit={(e)=>handleSearch(e)}>
+        <form className="relative mr-5 my-2" onSubmit={(e)=>handleSearch(e)}>
             <input
                 className="h-10 w-[250px] p-2 capitalize"
                 type="text"
                 value={searchTerm === "-"? "" : searchTerm}
                 onChange={(e)=>setSearchTerm(e.target.value)}
                 placeholder="&#x1F50E; Please enter any location"
+                disabled={loadedGPS? false:true}
             />
             {
                 suggestion?.length
