@@ -49,7 +49,7 @@ export default function Home() {
   useEffect(() => {
     if (location) {
       getForecast(location)
-        .then((res) => res.list.filter((day:{[key:string]:any}, i:number)=>(i === 0 || i % 8 === 0)))
+        .then((res) => res.list)
         .then((day) => day.map(formatForecastResponse))
         .then((list) => setForecast(list))
         .then(() => setSearchTerm("-"))
@@ -65,7 +65,7 @@ export default function Home() {
   }
 
   return (
-    <div onClick={e=>cancelDropdown(e)}>
+    <div onClick={e=>cancelDropdown(e)} className={loadedGPS? "cursor-default" : "cursor-wait" }>
       <nav className="flex flex-row flex-wrap justify-between items-center py-5 px-5 w-screen sticky top-0 z-50 bg-gray-300">
         <p className="text-3xl mr-5">Weathering</p>
         {loadedGPS? <></> : <p>Data loading... Your patience is highly appreciated :) </p>}
@@ -84,6 +84,9 @@ export default function Home() {
         <Header address={address} />
         <Dashboard forecast={forecast}/>
       </main>
+      <footer className="flex flex-row justify-center bg-gray-300 py-10">
+          <p>Created and designed by Kami Lam, 2023</p>
+      </footer>
     </div>
   )
 }
