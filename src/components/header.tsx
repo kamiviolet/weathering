@@ -1,12 +1,18 @@
 import { Address } from "@/types";
 
-export default function Header({address}: {address: Address | null}) {
+export default function Header({address}: {address: Address}) {
     return (
-        <div className="z-20 py-14">
-            <h1 className="text-7xl tracking-wider uppercase font-extrabold font-serif text-center leading-loose">
-                { address?.country || 'Weathering' }
+        <header className="py-10 px-5">
+            <h1 className="text-6xl tracking-wider uppercase font-extrabold font-serif text-center hyphens-auto leading-loose">
+                { address.city || 'Weathering' }
             </h1>
-            <p className="text-xl leading-loose">Interested in knowing the weather in somewhere else? You may want to manually set location in the search engine at the top.</p>
-        </div>
+            <h2 className="text-4xl tracking-wider uppercase font-extrabold font-serif text-center hyphens-auto leading-regular pb-10">
+                { address?.country || "" }
+            </h2>
+            <p className="text-xl text-center leading-loose">
+                Interested in knowing the weather in somewhere else?<br/>
+                You may want to manually set location in the search engine at the top.
+            </p>
+        </header>
     )
 }
