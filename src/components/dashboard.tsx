@@ -23,7 +23,7 @@ export default function Dashboard({forecast} : {forecast: Weather[]}) {
   }, [side])
 
   return (
-    <section className="relative flex my-5 backdrop-blur bg-slate-400/50 overflow-hidden">
+    <section className="relative flex my-5 backdrop-blur bg-slate-400/50">
       <BsFillCaretLeftFill
         className="absolute top-1/2 left-0 text-6xl cursor-pointer text-slate-800/50 hover:text-slate-900 hidden sm:block"
         onClick={()=>{setSide({direction: "left", time: side.time++})}}
