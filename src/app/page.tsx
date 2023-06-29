@@ -69,8 +69,8 @@ export default function Home() {
       onClick={e=>cancelDropdown(e)}
       className={
         loadedGPS
-        ? "absolute top-0 left-0 w-screen h-full min-h-[screen] cursor-default flex flex-col" 
-        : "absolute top-0 left-0 w-screen h-full min-h-[screen] cursor-wait flex flex-col" 
+        ? "absolute top-0 left-0 w-screen cursor-default flex flex-col" 
+        : "absolute top-0 left-0 w-screen cursor-wait flex flex-col" 
       }
     >
       <nav className="flex flex-row flex-wrap justify-between items-center py-5 px-5 w-screen sticky top-0 z-50">
