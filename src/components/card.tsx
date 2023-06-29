@@ -4,7 +4,7 @@ import { WiCloud, WiRain, WiDaySunny, WiNightClear, WiNightCloudy, WiDaySunnyOve
 export default function Card({day}: {day:Weather}) {
     const formattedDay:string = 
         new Date(day.time).toLocaleString("en-US", {
-            weekday: "short",
+            weekday: "long",
             year: "numeric",
             month: "numeric",
             day: "numeric",
@@ -24,8 +24,8 @@ export default function Card({day}: {day:Weather}) {
         <section
             className={
                 daytime
-                ? "bg-sky-400/30 grid grid-cols-2 sm:grid-cols-1 shrink-0 p-5 sm:mb-16 h-full w-full sm:w-64"
-                : "bg-blue-800/30 grid grid-cols-2 sm:grid-cols-1 shrink-0 p-5 sm:mb-16 h-full w-full sm:w-64"
+                ? "bg-sky-400/30 grid sm:grid-cols-1 shrink-0 p-5 sm:mb-16 h-full w-full sm:w-64"
+                : "bg-blue-800/30 grid sm:grid-cols-1 shrink-0 p-5 sm:mb-16 h-full w-full sm:w-64"
             }
         >
             <div className="col-start-1 col-span-2 row-start-1 grid grid-cols-2">
@@ -36,7 +36,7 @@ export default function Card({day}: {day:Weather}) {
                     {weekday}
                 </p>
             </div>
-            <div className="col-start-2 row-start-2 sm:col-start-1 sm:row-start-2 flex flex-col pt-7 pb-3 text-9xl justify-center items-center">
+            <div className="col-start-2 row-start-2 auto-cols-min sm:col-start-1 sm:row-start-2 grid pt-7 pb-3 text-9xl place-content-center">
                 <p className="text-center text-base">
                     {time}
                 </p>
@@ -56,27 +56,27 @@ export default function Card({day}: {day:Weather}) {
                     }
                 </span>
             </div>
-            <div className="col-start-1 row-start-2 sm:row-start-3 flex flex-col item-center justify-center">
-            <div className="grid grid-cols-2">
-                <span className="line-clamp-1 font-bold">Temperature:</span>
-                <span className="text-right">{day.temp} &#176;C</span>
-            </div>
-            <div className="grid grid-cols-2">
-                <span className="line-clamp-1 font-bold">Feels like:</span>
-                <span className="text-right">{day.feels_like} &#176;C</span>
-            </div>
-            <div className="grid grid-flow-col auto-cols-auto">
-                <span className="line-clamp-1 font-bold">Range:</span>
-                <span className="text-right">{day.temp_min} - {day.temp_max} &#176;C</span>
-            </div>
-            <div className="grid grid-cols-2">
-                <span className="line-clamp-1 font-bold">Humidity:</span>
-                <span className="text-right">{day.humidity} %</span>
-            </div>
-            <div className="grid grid-cols-2">
-                <span className="line-clamp-1 font-bold">Wind speed:</span>
-                <span className="text-right">{day.wind_speed} m/s</span>
-            </div>
+            <div className="col-start-1 auto-cols-max row-start-2 sm:row-start-3 flex flex-col item-center justify-center">
+                <div className="grid grid-cols-2">
+                    <span className="line-clamp-1 font-bold">Temperature:</span>
+                    <span className="text-right">{day.temp} &#176;C</span>
+                </div>
+                <div className="grid grid-cols-2">
+                    <span className="line-clamp-1 font-bold">Feels like:</span>
+                    <span className="text-right">{day.feels_like} &#176;C</span>
+                </div>
+                <div className="grid grid-flow-col auto-cols-auto">
+                    <span className="line-clamp-1 font-bold">Range:</span>
+                    <span className="text-right">{day.temp_min} - {day.temp_max} &#176;C</span>
+                </div>
+                <div className="grid grid-cols-2">
+                    <span className="line-clamp-1 font-bold">Humidity:</span>
+                    <span className="text-right">{day.humidity} %</span>
+                </div>
+                <div className="grid grid-cols-2">
+                    <span className="line-clamp-1 font-bold">Wind speed:</span>
+                    <span className="text-right">{day.wind_speed} m/s</span>
+                </div>
             </div>
         </section>
     )
