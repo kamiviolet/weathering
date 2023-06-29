@@ -13,8 +13,8 @@ export function getAddress(location: Location) {
         .catch((error:Error) => console.warn(error))
 }
 
-export function getBackground(city: string) {
-    return axios.get(`https://api.unsplash.com/photos/random?query=${city}&orientation=landscape&client_id=${process.env.UPSPLASH_API}`)
+export function getBackground(city?: string) {
+    return axios.get(`https://api.unsplash.com/photos/random?topics=${city},city&orientation=landscape&client_id=${process.env.UPSPLASH_API}`)
         .then(({data}) => data)
         .catch((error:Error) => console.warn(error))
 }
