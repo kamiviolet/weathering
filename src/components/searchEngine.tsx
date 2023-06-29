@@ -36,7 +36,7 @@ export default function SearchEngine({location, setLocation, searchTerm, setSear
     }, [searchTerm])
 
     return (
-        <form className="relative mr-5 my-2" onSubmit={(e)=>handleSearch(e)}>
+        <form className="relative mr-5 my-2 text-black" onSubmit={(e)=>handleSearch(e)}>
             <input
                 className="h-10 w-[250px] p-2 capitalize"
                 type="text"
@@ -51,7 +51,6 @@ export default function SearchEngine({location, setLocation, searchTerm, setSear
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
                     setLocation={setLocation}
-                    location={location}
                     suggestion={suggestion}
                 />
                 : <></>

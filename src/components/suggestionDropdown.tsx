@@ -1,10 +1,9 @@
 import { MouseEvent } from "react";
 import { searchResult, Location } from "@/types";
 
-export function SuggestionDropdown({suggestion, location, setLocation, searchTerm, setSearchTerm}:
+export function SuggestionDropdown({suggestion, setLocation, searchTerm, setSearchTerm}:
     {   
         suggestion: searchResult[],
-        location:Location,
         searchTerm:string,
         setLocation: (location:Location) => void,
         setSearchTerm: (searchTerm:string) => void
@@ -13,7 +12,8 @@ export function SuggestionDropdown({suggestion, location, setLocation, searchTer
         e.preventDefault();
         const target = (e.target as HTMLButtonElement).value;
         const details:Location = JSON.parse(target)
-
+        console.log(suggestion)
+        
         if (details) {
             setSearchTerm(details.city||searchTerm)
             setLocation({

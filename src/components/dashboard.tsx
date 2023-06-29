@@ -12,24 +12,27 @@ export default function Dashboard({forecast} : {forecast: Weather[]}) {
 
   useEffect(()=>{
     const {current} = sliderRef;
+
     if (current) {
-      side.direction === "left"
-      ? current.scrollLeft -= (window.innerWidth - 50)
-      : current.scrollLeft += (window.innerWidth - 50)
+      if (side.direction === "left") {
+        current.scrollLeft -= (window.innerWidth - 50)
+      } else {
+        current.scrollLeft += (window.innerWidth - 50)
+      }
     }
   }, [side])
 
   return (
-    <section className="relative flex flex-row h-full w-screen my-5 py-12 backdrop-blur md:grid-cols-5 bg-slate-400/50 overflow-hidden">
+    <section className="relative flex my-5 backdrop-blur bg-slate-400/50 overflow-hidden">
       <BsFillCaretLeftFill
-        className="absolute top-1/2 left-0 text-6xl cursor-pointer text-slate-800/50 hover:text-slate-900"
+        className="absolute top-1/2 left-0 text-6xl cursor-pointer text-slate-800/50 hover:text-slate-900 hidden sm:block"
         onClick={()=>{setSide({direction: "left", time: side.time++})}}
       />
       <BsFillCaretRightFill
-        className="absolute top-1/2 right-0 text-6xl cursor-pointer text-slate-800/50 hover:text-slate-900"
+        className="absolute top-1/2 right-0 text-6xl cursor-pointer text-slate-800/50 hover:text-slate-900 hidden sm:block"
         onClick={()=>{setSide({direction: "right", time: side.time++})}}
       />
-      <div className="flex flex-row h-full w-full overflow-x-auto scroll-smooth snap-start scroll-snap-stop: always scroll-my-5" ref={sliderRef} >
+      <div className="flex flex-col sm:flex-row h-full w-full overflow-x-auto scroll-smooth snap-start scroll-snap-stop: always scroll-my-5" ref={sliderRef} >
         {
           forecast.map((day) => {
             return <Card key={day.dt} day={day} />

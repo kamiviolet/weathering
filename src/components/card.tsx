@@ -1,27 +1,62 @@
 import { Weather } from "@/types";
-import { WiCloud, WiDaySunny, WiDaySunnyOvercast, WiNa } from "react-icons/wi";
+import { WiCloud, WiRain, WiDaySunny, WiNightClear, WiNightCloudy, WiDaySunnyOvercast, WiNa } from "react-icons/wi";
 
 export default function Card({day}: {day:Weather}) {
-    const date:string = day.time.split(" ")[0];
-    const time:string = day.time.split(" ")[1];
-
+    const formattedDay:string = 
+        new Date(day.time).toLocaleString("en-US", {
+            weekday: "short",
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            hour: "2-digit",
+            minute:"2-digit",
+            hour12: true
+        });
+    const weekday:string = formattedDay.split(", ")[0];
+    const date:string = formattedDay.split(", ")[1];
+    const time:string = formattedDay.split(", ")[2];
+    const daytime:boolean =
+        parseInt(day.time.split(" ")[1]) >= 6
+        &&
+        parseInt(day.time.split(" ")[1]) < 18;
+        
     return (
-        <section className="flex shrink-0 flex-col bg-white/70 rounded-xl h-full p-5 mx-8 mb-10 w-56">
-            <div className="grid grid-cols-2">
-                <p className="font-black">{date}</p>
-                <p className="text-right text-base">{time}</p>
+        <section
+            className={
+                daytime
+                ? "bg-sky-400/30 grid grid-cols-2 sm:grid-cols-1 shrink-0 p-5 sm:mb-16 h-full w-full sm:w-64"
+                : "bg-blue-800/30 grid grid-cols-2 sm:grid-cols-1 shrink-0 p-5 sm:mb-16 h-full w-full sm:w-64"
+            }
+        >
+            <div className="col-start-1 col-span-2 row-start-1 grid grid-cols-2">
+                <p className="font-black">
+                    {date}
+                </p>
+                <p className="text-right text-base">
+                    {weekday}
+                </p>
             </div>
-            <div className="flex flex-row py-5 text-8xl justify-center">
+            <div className="col-start-2 row-start-2 sm:col-start-1 sm:row-start-2 flex flex-col pt-7 pb-3 text-9xl justify-center items-center">
+                <p className="text-center text-base">
+                    {time}
+                </p>
                 <span>
                     {
-                        day.main == "Clouds"
+                        day.main === "Clouds" && daytime
                         ? <WiCloud />
-                        : day.main == "Clear"
+                        : day.main === "Clouds"
+                        ? <WiNightCloudy />
+                        : day.main === "Clear" && daytime
                         ? <WiDaySunny />
+                        : day.main === "Clear"
+                        ? <WiNightClear />
+                        : day.main === "Rain"
+                        ? <WiRain />
                         : <WiNa />
                     }
                 </span>
             </div>
+            <div className="col-start-1 row-start-2 sm:row-start-3 flex flex-col item-center justify-center">
             <div className="grid grid-cols-2">
                 <span className="line-clamp-1 font-bold">Temperature:</span>
                 <span className="text-right">{day.temp} &#176;C</span>
@@ -41,6 +76,7 @@ export default function Card({day}: {day:Weather}) {
             <div className="grid grid-cols-2">
                 <span className="line-clamp-1 font-bold">Wind speed:</span>
                 <span className="text-right">{day.wind_speed} m/s</span>
+            </div>
             </div>
         </section>
     )

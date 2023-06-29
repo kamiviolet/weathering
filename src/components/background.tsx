@@ -1,5 +1,6 @@
-import { Address } from "@/types";
+import Image from "next/image";
 import { useState, useLayoutEffect } from "react";
+import { Address } from "@/types";
 import { getBackground } from "@/api"
 
 export default function Background({address}: {address: Address}) {
@@ -7,7 +8,7 @@ export default function Background({address}: {address: Address}) {
 
     useLayoutEffect(() => {
         if (address.country) {
-          getBackground(address.country)
+          getBackground(address.city || address.country)
             .then((d) => setBackgroundURL(d?.urls.regular))
         }
       }, [address])
@@ -16,9 +17,11 @@ export default function Background({address}: {address: Address}) {
         <div className="absolute top-0 bottom-0 left-0 right-0 -z-50 w-screen lg:h-screen sm:h-full md:h-full bg-white/50">
             {
                 backgroundURL
-                ? <img
+                ? <Image
                     src={backgroundURL}
-                    className="object-cover bg-fixed w-full h-full mix-blend-plus-lighter"/>
+                    fill={true}
+                    alt={address.city||address.country}                 
+                    className="object-cover bg-fixed mix-blend-plus-lighter"/>
                 : <></>
             }
         </div>

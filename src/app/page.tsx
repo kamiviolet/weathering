@@ -65,8 +65,15 @@ export default function Home() {
   }
 
   return (
-    <div onClick={e=>cancelDropdown(e)} className={loadedGPS? "cursor-default" : "cursor-wait" }>
-      <nav className="flex flex-row flex-wrap justify-between items-center py-5 px-5 w-screen sticky top-0 z-50 bg-gray-300">
+    <div 
+      onClick={e=>cancelDropdown(e)}
+      className={
+        loadedGPS
+        ? "absolute top-0 left-0 w-screen h-screen cursor-default flex flex-col" 
+        : "absolute top-0 left-0 w-screen h-screen cursor-wait flex flex-col" 
+      }
+    >
+      <nav className="flex flex-row flex-wrap justify-between items-center py-5 px-5 w-screen sticky top-0 z-50">
         <p className="text-3xl mr-5">Weathering</p>
         {loadedGPS? <></> : <p>Data loading... Your patience is highly appreciated :) </p>}
         <SearchEngine
@@ -79,13 +86,14 @@ export default function Home() {
           setSuggestion={setSuggestion}
         />
       </nav>
-      <main className="relative">
+      <main className="relative text-black">
         {loadedGPS? <Background address={address} /> : <></>}
         <Header address={address} />
-        <Dashboard forecast={forecast}/>
+        {loadedGPS? <Dashboard forecast={forecast}/> : <></>}
       </main>
-      <footer className="flex flex-row justify-center bg-gray-300 py-10">
-          <p>Created and designed by Kami Lam, 2023</p>
+      <footer className="flex flex-col justify-start items-center max-h-[20vh] py-10">
+        <p>Created and designed by Kami Lam, 2023</p>
+        <p>About the site</p>
       </footer>
     </div>
   )

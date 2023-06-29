@@ -7,6 +7,16 @@ const nextConfig = {
         OPENWEATHER_API: process.env.OPENWEATHER_API,
         UPSPLASH_API: process.env.UPSPLASH_API
       },
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'images.unsplash.com',
+          port: '',
+          pathname: '/**'
+        }
+      ],
+    },
 }
 
 module.exports = nextConfig
