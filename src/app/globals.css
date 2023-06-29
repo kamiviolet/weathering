@@ -18,16 +18,16 @@
 
 body {
   position: relative;
+  background-color: rgb(var(--background-start-rgb));
 }
 
 nav {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
+      rgb(var(--background-start-rgb)),
+      transparent 75%
     )
-    rgb(var(--background-start-rgb));
 }
 
 footer {

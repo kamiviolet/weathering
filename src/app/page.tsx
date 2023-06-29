@@ -69,29 +69,31 @@ export default function Home() {
       onClick={e=>cancelDropdown(e)}
       className={
         loadedGPS
-        ? "h-full relative sm:h-screen w-screen cursor-default flex flex-col" 
-        : "h-full relative sm:h-screen w-screen cursor-wait flex flex-col" 
+        ? "h-screen relative sm:h-screen w-screen cursor-default grid" 
+        : "h-screen relative sm:h-screen w-screen cursor-wait grid" 
       }
     >
-      <nav className="flex flex-row flex-wrap justify-between items-center py-5 px-5 w-screen sticky top-0 z-50">
-        <p className="text-3xl mr-5">Weathering</p>
-        {loadedGPS? <></> : <p>Data loading... Your patience is highly appreciated :) </p>}
-        <SearchEngine
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          location={location}
-          setLocation={setLocation}
-          loadedGPS={loadedGPS}
-          suggestion={suggestion}
-          setSuggestion={setSuggestion}
-        />
+      <nav className="flex flex-row flex-wrap items-start pt-2 pb-15 px-5 min-h-[15vh] w-screen sticky top-0 z-50">
+        <div className="flex flex-row flex-wrap justify-between items-center w-full">
+          <p className="text-3xl mr-5">Weathering</p>
+          {loadedGPS? <></> : <p>Data loading... Your patience is highly appreciated :) </p>}
+          <SearchEngine
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            location={location}
+            setLocation={setLocation}
+            loadedGPS={loadedGPS}
+            suggestion={suggestion}
+            setSuggestion={setSuggestion}
+          />
+        </div>
       </nav>
-      <main className="relative text-black min-h-[70vh] overflow-y-auto">
-        {loadedGPS? <Background address={address} /> : <></>}
+      {loadedGPS? <Background address={address} /> : <></>}
+      <main className=" text-black min-h-[70vh] overflow-y-auto">
         <Header address={address} />
         {loadedGPS? <Dashboard forecast={forecast}/> : <></>}
       </main>
-      <footer className="flex flex-col justify-start items-center py-10 w-full">
+      <footer className="self-end flex flex-col justify-start items-center py-5 w-full text-sm">
         <p>Created and designed by Kami Lam, 2023</p>
         <p>About the site</p>
       </footer>

@@ -38,7 +38,7 @@ export default function SearchEngine({location, setLocation, searchTerm, setSear
     return (
         <form className="relative mr-5 my-2 text-black" onSubmit={(e)=>handleSearch(e)}>
             <input
-                className="h-10 w-[250px] p-2 capitalize"
+                className="h-10 w-[250px] p-2 capitalize shadow-inner"
                 type="text"
                 value={searchTerm === "-"? "" : searchTerm}
                 onChange={(e)=>setSearchTerm(e.target.value)}
