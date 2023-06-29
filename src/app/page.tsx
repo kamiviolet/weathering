@@ -86,7 +86,7 @@ export default function Home() {
           setSuggestion={setSuggestion}
         />
       </nav>
-      <main className="relative text-black">
+      <main className="relative text-black min-h-[50vh]">
         {loadedGPS? <Background address={address} /> : <></>}
         <Header address={address} />
         {loadedGPS? <Dashboard forecast={forecast}/> : <></>}
